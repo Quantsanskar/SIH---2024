@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthConnect</title>
+    <meta name="description" content="Your trusted healthcare companion">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="home.module.css">
+</head>
+
+<body>
+    <div id="lazyLoadingContainer" class="lazyLoadingContainer">
+        <div class="pulse"></div>
+        <div class="healthIcon">
+            <span class="iconPart">+</span>
+        </div>
+        <div class="loadingText">HealthConnect</div>
+    </div>
+
+    <div id="mainContent" class="container" style="display: none;">
+        <header class="header">
+            <nav class="navbar">
+                <div class="logo">Health<span>Connect</span> 🏥</div>
+                <ul class="navLinks">
+                    <li><a href="#features">✨ Features</a></li>
+                    <li><a href="#about">ℹ️ About</a></li>
+                    <li><a href="#contact">📞 Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main">
+            <section class="hero">
+                <h1>Welcome to HealthConnect 🌟</h1>
+                <p>Your friendly healthcare companion for a happier, healthier you! 😊</p>
+                <div class="cta">
+                    <button onclick="handleLogin()" class="primaryBtn">Sign In 🔐</button>
+                    <button onclick="handleRegister()" class="secondaryBtn">Register Here</button>
+                </div>
+            </section>
+
+            <section id="features" class="features">
+                <h2>Amazing Features 🚀</h2>
+                <div class="featureGrid">
+                    <div class="featureCard">
+                        <h3>Easy Appointments ⏰</h3>
+                        <p>Schedule your visits with just a few taps!</p>
+                    </div>
+                    <div class="featureCard">
+                        <h3>Medical Records 📊</h3>
+                        <p>Your health history at your fingertips</p>
+                    </div>
+                    <div class="featureCard">
+                        <h3>Secure Chats 🔒</h3>
+                        <p>Talk to your doctors safely and easily</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="about">
+                <h2>About HealthConnect 💖</h2>
+                <p>At HealthConnect, we believe in making healthcare fun, friendly, and accessible for everyone! Our
+                    colorful platform is designed to put a smile on your face while taking care of your health needs.
+                    Join us in creating a happier, healthier world! 🌈🌍</p>
+            </section>
+
+            <section id="contact" class="contact">
+                <h2>Get in Touch 👋</h2>
+                <p>We'd love to hear from you! Reach out anytime:</p>
+                <p>📧 Email: hello@healthconnect.com</p>
+                <p>📱 Phone: (555) 123-4567</p>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 HealthConnect Patient Portal. Spreading smiles and good health! 😄</p>
+            <div class="socialLinks">
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter 🐦</a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook 👥</a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram 📸</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
