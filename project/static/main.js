@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function handleLogin() {
-    window.location.href = 'login.html';
+    window.location.href = 'login';
 }
 
 function handleRegister() {
-    window.location.href = 'register.html';
+    window.location.href = 'register';
 }

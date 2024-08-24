@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block head_meta %} {% endblock head_meta %}
+    <title>{% block title %} {% endblock title %} | HealthConnect</title>
+    <meta name="description" content="Your trusted healthcare companion" />
+    <link rel="icon" href="/favicon.ico" />
+    {% block head_link %} {% endblock head_link %}
+  </head>
+
+  <body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">Health<span>Connect</span> 🏥</div>
+            <ul class="navLinks">
+                <li><a href="#features">✨ Features</a></li>
+                <li><a href="#about">ℹ️ About</a></li>
+                <li><a href="#contact">📞 Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block body %} {% endblock body %}
+    
+
+      <footer class="footer">
+        <p>
+          &copy; 2024 HealthConnect Patient Portal. Spreading smiles and good
+          health! 😄
+        </p>
+        <div class="socialLinks">
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Twitter 🐦</a
+          >
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Facebook 👥</a
+          >
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Instagram 📸</a
+          >
+        </div>
+      </footer>
+    </div>
+    {% block body_script %} {% endblock body_script %}
+    
+  </body>
+</html>

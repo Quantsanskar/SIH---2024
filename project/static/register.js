@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                window.location.href = '/login.html';
+                window.location.href = '/login';
             } else {
                 throw new Error('Registration failed');
             }

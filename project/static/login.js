@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if user is already logged in
     const token = localStorage.getItem('token');
     if (token) {
-        window.location.href = '/dashboard';
+        window.location.href = '';
     }
 
     loginForm.addEventListener('submit', async function(e) {
