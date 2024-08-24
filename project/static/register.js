@@ -15,20 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Check if email is already registered
-            const checkEmailResponse = await fetch('http://127.0.0.1:8000/api/check-email/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: data.email }),
-            });
+            // const checkEmailResponse = await fetch('http://127.0.0.1:8000/api/check-email/', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({ email: data.email }),
+            // });
             
-            const checkEmailResult = await checkEmailResponse.json();
+            // const checkEmailResult = await checkEmailResponse.json();
             
-            if (checkEmailResult.exists) {
-                errorElement.textContent = 'Email is already registered';
-                return;
-            }
+            // if (checkEmailResult.exists) {
+            //     errorElement.textContent = 'Email is already registered';
+            //     return;
+            // }
 
             // If email is not registered, proceed with registration
             const response = await fetch('http://127.0.0.1:8000/api/register/', {

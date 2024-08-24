@@ -7,6 +7,9 @@ def index(request):
 
 
 def register(request):
+    if request.method == "POST":
+        response = request.get("http://127.0.0.1:8000/api/register/")
+        print(response)
     return render(request, "register.html")
 
 
