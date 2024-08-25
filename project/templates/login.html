@@ -22,7 +22,7 @@
             <h1 class="title">Welcome Back</h1>
             <p class="subtitle">Sign in to your account</p>
             <div id="errorMessage" class="error" style="display: none"></div>
-            <form id="loginForm" class="form">
+            <form id="loginForm" class="form" method="POST" action="/login">
                 {% csrf_token %}
                 <div class="inputGroup">
                     <input type="text" id="email" name="email" required placeholder="Username/Email" />

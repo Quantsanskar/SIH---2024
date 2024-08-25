@@ -15,3 +15,6 @@ def register(request):
 
 def login(request):
     return render(request, "login.html")
+
+def patient_portal(request):
+    return render(request,"patient_portal.html")
