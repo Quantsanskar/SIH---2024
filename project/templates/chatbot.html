@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Q&A Chatbot</title>
+    <link rel="stylesheet" href="static/chatbot.css">
+</head>
+
+<body>
+
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            Medical Q&A Chatbot
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Ask a question...">
+            <button id="chatbot-send-btn">Send</button>
+            <button id="stop-btn" style="display: none;">Stop</button>
+        </div>
+    </div>
+    <script type="module" src="chatbot.js"></script>
+
+</body>
+
+</html>
