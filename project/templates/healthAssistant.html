@@ -1,0 +1,34 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Health Assistant</title>
+    <link rel="stylesheet" href="static/healthAssistant.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <header>
+            <svg class="logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h1>Personal Health Assistant</h1>
+        </header>
+        <div id="questionContainer" class="fade-in">
+            <!-- Questions will be dynamically added here -->
+        </div>
+        <button id="submitBtn" class="pulse" style="display: none;">Get Recommendations</button>
+        <div id="recommendationContainer" style="display: none;">
+            <h2>Your Personalized Recommendations</h2>
+            <div id="dietPlan" class="recommendation-box"></div>
+            <div id="mealRecipes" class="recommendation-box"></div>
+            <div id="healthPrecautions" class="recommendation-box"></div>
+            <div id="safetyGuidelines" class="recommendation-box"></div>
+        </div>
+    </div>
+    <script type="module" src="static/healthAssistant.js"></script>
+</body>
+</html>

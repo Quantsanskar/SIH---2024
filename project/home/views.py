@@ -18,3 +18,6 @@ def login(request):
 
 def patient_portal(request):
     return render(request,"patient_portal.html")
+
+def health_assis(request):
+    return render(request,"healthAssistant.html")
