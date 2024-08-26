@@ -318,3 +318,81 @@ html {
         flex-direction: column;
     }
 }
+
+.health-assistant-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 100px;
+    width: 60px;
+    height: 60px;
+    background-color: #4a90e2;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.health-assistant-widget:hover {
+    width: 300px;
+    height: auto;
+    border-radius: 20px;
+}
+
+.widget-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.widget-icon svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}
+
+.widget-content {
+    padding: 20px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.health-assistant-widget:hover .widget-content {
+    opacity: 1;
+}
+
+.widget-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
+.widget-content p {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+}
+
+.open-assistant-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: white;
+    color: #4a90e2;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.open-assistant-btn:hover {
+    background-color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+    .health-assistant-widget:hover {
+        width: 250px;
+    }
+}

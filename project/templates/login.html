@@ -1,70 +1,93 @@
-{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Login{% endblock title %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'login.module.css' %}"/>
+    <link rel="stylesheet" href="{% static 'home.module.css' %}"/>
+    <link rel="stylesheet" href="{% static 'chatbot.css' %}"/>
+</head>
 
-{% block head_link %}
-<link rel="stylesheet" href="static\login.module.css" />
-<link rel="stylesheet" href="static/home.module.css">
-<link rel="stylesheet" href="static\chatbot.css">
-{% endblock head_link %}
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">Health<span>Connect</span> 🏥</div>
+            <ul class="navLinks">
 
-{% block body %}
+                <li><a href="patient_portal">Patient Portal</a></li>
+                <li><a href="#features">✨ Features</a></li>
+                <li><a href="#about">ℹ️ About</a></li>
+                <li><a href="#contact">📞 Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="loadingContainer" class="loadingContainer">
+        <div class="loadingSpinner"></div>
+    </div>
 
-<div id="loadingContainer" class="loadingContainer">
-    <div class="loadingSpinner"></div>
-</div>
-
-<div id="loginContainer" class="container" style="display: none">
-    <div class="formWrapper">
-        <div class="formContent">
-            <a href="/" class="backArrow">
-                <span>←</span>
-            </a>
-            <h1 class="title">Welcome Back</h1>
-            <p class="subtitle">Sign in to your account</p>
-            <div id="errorMessage" class="error" style="display: none"></div>
-            <form id="loginForm" class="form" method="POST" action="/login">
-                {% csrf_token %}
-                <div class="inputGroup">
-                    <input type="text" id="email" name="email" required placeholder="Username/Email" />
-                </div>
-                <div class="inputGroup">
-                    <input type="password" id="password" name="password" required placeholder="Password" />
-                </div>
-                <button type="submit" class="submitButton">Sign In</button>
-            </form>
-            <p class="registerLink">
-                Don't have an account?
-                <a href="register" class="link">Create one now</a>
-            </p>
+    <div id="loginContainer" class="container" style="display: none">
+        <div class="formWrapper">
+            <div class="formContent">
+                <a href="/" class="backArrow">
+                    <span>←</span>
+                </a>
+                <h1 class="title">Welcome Back</h1>
+                <p class="subtitle">Sign in to your account</p>
+                <div id="errorMessage" class="error" style="display: none"></div>
+                <form id="loginForm" class="form" method="POST" action="/login">
+                    {% csrf_token %}
+                    <div class="inputGroup">
+                        <input type="text" id="email" name="email" required placeholder="Username/Email" />
+                    </div>
+                    <div class="inputGroup">
+                        <input type="password" id="password" name="password" required placeholder="Password" />
+                    </div>
+                    <button type="submit" class="submitButton">Sign In</button>
+                </form>
+                <p class="registerLink">
+                    Don't have an account?
+                    <a href="register" class="link">Create one now</a>
+                </p>
+            </div>
         </div>
     </div>
-</div>
-<div id="chatbot-toggle" class="chatbot-toggle">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-        <path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/>
-    </svg>
-</div>
-
-<div id="chatbot-container" class="chatbot-container" style="display: none;">
-    <div class="chatbot-header">
-        Medical Q&A Chatbot
+    <div id="chatbot-toggle" class="chatbot-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
+            <path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
+        </svg>
     </div>
-    <div class="chatbot-messages" id="chatbot-messages">
-        <!-- Messages will appear here -->
-    </div>
-    <div class="chatbot-input-container">
-        <input type="text" id="chatbot-input" placeholder="Ask a question...">
-        <button id="chatbot-send-btn">Send</button>
-        <button id="stop-btn" style="display: none;">Stop</button>
-    </div>
-</div>
 
-{% endblock body %}
-
-{% block body_script %}
+    <div id="chatbot-container" class="chatbot-container" style="display: none;">
+        <div class="chatbot-header">
+            Medical Q&A Chatbot
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Ask a question...">
+            <button id="chatbot-send-btn">Send</button>
+            <button id="stop-btn" style="display: none;">Stop</button>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>
+            &copy; 2024 HealthConnect Patient Portal. Spreading smiles and good
+            health! 😄
+        </p>
+        <div class="socialLinks">
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter 🐦</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook 👥</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram 📸</a>
+        </div>
+    </footer>
+</body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="static\login.js"></script>
-<script type="module" src="static\chatbot.js"></script>
-{% endblock body_script %}
+<script src="{% static 'login.js' %}"></script>
+<script type="module" src="{% static 'chatbot.js' %}"></script>
+
+</html>
