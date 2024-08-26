@@ -3,26 +3,33 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MediCare Patient Portal</title>
-    <link rel="stylesheet" href="static/patient_portal.css">
+    <link rel="stylesheet" href="static/patient_portal.css" />
 </head>
 
 <body>
     <div class="container">
         <header>
             <h1>🏥 MediCare Patient Portal</h1>
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
         </header>
 
         <main>
             <section id="disease-selection">
                 <h2>🦠 Select Your Condition</h2>
                 <div class="disease-options">
-                    <button class="disease-btn" data-disease="cold">🤧 Common Cold</button>
+                    <button class="disease-btn" data-disease="cold">
+                        🤧 Common Cold
+                    </button>
                     <button class="disease-btn" data-disease="flu">🤒 Flu</button>
-                    <button class="disease-btn" data-disease="headache">🤕 Headache</button>
-                    <button class="disease-btn" data-disease="stomachache">🤢 Stomachache</button>
+                    <button class="disease-btn" data-disease="headache">
+                        🤕 Headache
+                    </button>
+                    <button class="disease-btn" data-disease="stomachache">
+                        🤢 Stomachache
+                    </button>
                     <button class="disease-btn" data-disease="other">❓ Other</button>
                 </div>
             </section>
@@ -31,7 +38,7 @@
                 <h2>🤖 Chatbot Recommendations</h2>
                 <div class="chat-container">
                     <div id="chat-messages"></div>
-                    <input type="text" id="user-input" placeholder="Type your message...">
+                    <input type="text" id="user-input" placeholder="Type your message..." />
                     <button id="send-btn">Send</button>
                 </div>
             </section>
@@ -47,9 +54,9 @@
                     <label for="doctor">Select Doctor:</label>
                     <select id="doctor" required></select>
                     <label for="date">Select Date:</label>
-                    <input type="date" id="date" required>
+                    <input type="date" id="date" required />
                     <label for="time">Select Time:</label>
-                    <input type="time" id="time" required>
+                    <input type="time" id="time" required />
                     <button type="submit">Book Appointment</button>
                 </form>
             </section>
@@ -57,7 +64,7 @@
             <section id="file-upload">
                 <h2>📁 Upload Medical Files</h2>
                 <form id="file-upload-form">
-                    <input type="file" id="file-input" multiple>
+                    <input type="file" id="file-input" multiple />
                     <button type="submit">Upload Files</button>
                 </form>
                 <div id="upload-status"></div>

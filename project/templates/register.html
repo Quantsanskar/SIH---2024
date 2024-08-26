@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}New Patient Registration{% endblock title %}
 
 {% block head_link %}
-<link rel="stylesheet" href="static\register.css" />
-<link rel="stylesheet" href="static/home.module.css">
+<link rel="stylesheet" href="{% static 'register.css' %}" />
+<link rel="stylesheet" href="{% static 'home.module.css' %}" />
 {% endblock head_link %}
 
 {% block body %}
@@ -13,7 +13,9 @@
         <div class="formContainer">
             <h1 class="title">🏥 New Patient Registration</h1>
             <p id="error" class="error"></p>
-            <form id="registrationForm" class="form" method="POST" action="/register">
+            <form id="registrationForm" class="form" method="POST" action="{% url 'register' %}">
+                {% csrf_token %}
+                <!-- Personal Information Section -->
                 <div class="section">
                     <h2>👤 Personal Information</h2>
                     <div class="inputGroup">
@@ -40,6 +42,7 @@
                     <input type="text" name="emergencyContact" placeholder="🚨 Emergency Contact" class="input" />
                 </div>
 
+                <!-- Medical Information Section -->
                 <div class="section">
                     <h2>🩺 Medical Information</h2>
                     <select name="bloodType" class="input">
@@ -62,6 +65,7 @@
                         class="textarea"></textarea>
                 </div>
 
+                <!-- Lifestyle Information Section -->
                 <div class="section">
                     <h2>🌿 Lifestyle Information</h2>
                     <div class="checkboxGroup">
@@ -85,6 +89,7 @@
                     <input type="text" name="occupation" placeholder="💼 Occupation" class="input" />
                 </div>
 
+                <!-- Insurance Information Section -->
                 <div class="section">
                     <h2>📋 Insurance Information</h2>
                     <input type="text" name="insuranceProvider" placeholder="🏢 Insurance Provider" class="input" />
@@ -95,7 +100,7 @@
             </form>
             <p class="switchPrompt">
                 Already have an account?
-                <a href="login" class="link">Sign In 🔐</a>
+                <a href="{% url 'login' %}" class="link">Sign In 🔐</a>
             </p>
         </div>
     </div>
@@ -103,5 +108,5 @@
 {% endblock body %}
 
 {% block body_script %}
-<script src="static\register.js"></script>
+<script src="{% static 'register.js' %}"></script>
 {% endblock body_script %}
