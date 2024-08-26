@@ -107,10 +107,11 @@ html {
 .primaryBtn {
     background-color: #4a90e2;
     color: white;
-    border: none;
+    border: 2px solid white;
 }
 
 .primaryBtn:hover {
+    background-color: #629cdf;
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -123,12 +124,14 @@ html {
 
 .secondaryBtn:hover {
     transform: translateY(-3px);
+    background-color: rgb(228, 226, 226);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .features,
 .about,
 .contact {
+    font-size: 1.5rem;
     background-color: white;
     padding: 2rem;
     border-radius: 15px;
@@ -163,18 +166,19 @@ html {
 }
 
 .featureCard h3 {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     color: #333;
     margin-bottom: 0.5rem;
 }
 
 .featureCard p {
     color: #666;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
 }
 
 .about p,
 .contact p {
+    font-size: 1.2rem;
     color: #444;
     line-height: 1.6;
 }
