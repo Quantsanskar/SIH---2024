@@ -18,12 +18,13 @@
     </div>
 
     <div id="loginContainer" class="container" style="display: none">
+
+
         <div class="header">
             <nav class="navbar">
                 <div class="logo" onclick="window.location.href='/'" style="cursor: pointer;">Health<span>Connect</span>
                     🏥</div>
                 <ul class="navLinks">
-
                     <li><a href="patient_portal">Patient Portal</a></li>
                     <li><a href="#features">✨ Features</a></li>
                     <li><a href="#about">ℹ️ About</a></li>
@@ -31,9 +32,20 @@
                 </ul>
             </nav>
         </div>
+
         <div class="formcontainer">
+
             <div class="formWrapper">
+
                 <div class="formContent">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
                     <a href="/" class="backArrow">
                         <span>🡸</span>
                     </a>
@@ -88,10 +100,8 @@
                 <button id="chatbot-send-btn">Send</button>
                 <button id="stop-btn" style="display: none;">Stop</button>
             </div>
-
         </div>
     </div>
-
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
