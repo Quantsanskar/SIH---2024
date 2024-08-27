@@ -1,135 +1,169 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HealthConnect - Your Friendly Healthcare Companion</title>
     <link rel="stylesheet" href="{% static 'home.module.css' %}" />
-    <link rel="stylesheet" href="{% static 'chatbot.css' %}">
-</head>
+    <link rel="stylesheet" href="{% static 'chatbot.css' %}" />
+  </head>
 
-<body>
-
-
+  <body>
     <div id="lazyLoadingContainer" class="lazyLoadingContainer">
-        <div class="pulse"></div>
-        <div class="healthIcon">
-            <span class="iconPart">+</span>
-        </div>
-        <div class="loadingText">HealthConnect</div>
+      <div class="pulse"></div>
+      <div class="healthIcon">
+        <span class="iconPart">+</span>
+      </div>
+      <div class="loadingText">HealthConnect</div>
     </div>
 
     <div id="mainContent" class="container" style="display: none">
-        <div class="header">
-            <nav class="navbar">
-                <div class="logo" onclick="window.location.href='/'" style="cursor: pointer;">Health<span>Connect</span>
-                    🏥</div>
-                <ul class="navLinks">
-                    <li><a href="patient_portal">Patient Portal</a></li>
-                    <li><a href="#features">✨ Features</a></li>
-                    <li><a href="#about">ℹ️ About</a></li>
-                    <li><a href="/contact">📞 Contact</a></li>
-                </ul>
-            </nav>
+      <div class="header">
+        <nav class="navbar">
+          <div
+            class="logo"
+            onclick="window.location.href='/'"
+            style="cursor: pointer"
+          >
+            Health<span>Connect</span> 🏥
+          </div>
+          <ul class="navLinks">
+            <li><a href="patient_portal">Patient Portal</a></li>
+            <li><a href="#features">✨ Features</a></li>
+            <li><a href="#about">ℹ️ About</a></li>
+            <li><a href="/contact">📞 Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <main class="main">
+        <section class="hero">
+          <h1>Welcome to HealthConnect</h1>
+          <p>
+            Your friendly healthcare companion for a happier, healthier you!
+          </p>
+          <div class="cta">
+            <button onclick="handleLogin()" class="primaryBtn">Sign In</button>
+            <button onclick="handleRegister()" class="secondaryBtn">
+              Register Here
+            </button>
+          </div>
+        </section>
+
+        <section id="features" class="features">
+          <h2 style="font-size: 2.3rem">Amazing Features 🚀</h2>
+          <div class="featureGrid">
+            <div class="featureCard">
+              <h3>Easy Appointments ⏰</h3>
+              <p>Schedule your visits with just a few taps!</p>
+            </div>
+            <div class="featureCard">
+              <h3>Medical Records 📊</h3>
+              <p>Your health history at your fingertips</p>
+            </div>
+            <div class="featureCard">
+              <h3>Secure Chats 🔒</h3>
+              <p>Talk to your doctors safely and easily</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="about">
+          <h2 style="font-size: 2.3rem">About HealthConnect 💖</h2>
+          <p>
+            At HealthConnect, we believe in making healthcare fun, friendly, and
+            accessible for everyone! Our colorful platform is designed to put a
+            smile on your face while taking care of your health needs. Join us
+            in creating a happier, healthier world! 🌈🌍
+          </p>
+        </section>
+
+        <section id="contact" class="contact">
+          <h2>Get in Touch 👋</h2>
+          <p>We'd love to hear from you! Reach out anytime:</p>
+          <p>📧 Email: hello@healthconnect.com</p>
+          <p>📱 Phone: (555) 123-4567</p>
+        </section>
+      </main>
+      <div class="footer">
+        <p>
+          &copy; 2024 HealthConnect Patient Portal. Spreading smiles and good
+          health! 😄
+        </p>
+        <div class="socialLinks">
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Twitter 🐦</a
+          >
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Facebook 👥</a
+          >
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Instagram 📸</a
+          >
         </div>
-        <main class="main">
-            <section class="hero">
-                <h1>Welcome to HealthConnect </h1>
-                <p>Your friendly healthcare companion for a happier, healthier you! </p>
-                <div class="cta">
-                    <button onclick="handleLogin()" class="primaryBtn">Sign In </button>
-                    <button onclick="handleRegister()" class="secondaryBtn">Register Here</button>
-                </div>
-            </section>
+      </div>
 
-            <section id="features" class="features">
-                <h2 style="font-size: 2.3rem;">Amazing Features 🚀</h2>
-                <div class="featureGrid">
-                    <div class="featureCard">
-                        <h3>Easy Appointments ⏰</h3>
-                        <p>Schedule your visits with just a few taps!</p>
-                    </div>
-                    <div class="featureCard">
-                        <h3>Medical Records 📊</h3>
-                        <p>Your health history at your fingertips</p>
-                    </div>
-                    <div class="featureCard">
-                        <h3>Secure Chats 🔒</h3>
-                        <p>Talk to your doctors safely and easily</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="about" class="about">
-                <h2 style="font-size: 2.3rem;">About HealthConnect 💖</h2>
-                <p>
-                    At HealthConnect, we believe in making healthcare fun, friendly, and
-                    accessible for everyone! Our colorful platform is designed to put a
-                    smile on your face while taking care of your health needs. Join us in
-                    creating a happier, healthier world! 🌈🌍
-                </p>
-            </section>
-
-            <section id="contact" class="contact">
-                <h2>Get in Touch 👋</h2>
-                <p>We'd love to hear from you! Reach out anytime:</p>
-                <p>📧 Email: hello@healthconnect.com</p>
-                <p>📱 Phone: (555) 123-4567</p>
-            </section>
-        </main>
-        <div class="footer">
-            <p>&copy; 2024 HealthConnect Patient Portal. Spreading smiles and good health! 😄</p>
-            <div class="socialLinks">
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter 🐦</a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook 👥</a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram 📸</a>
-            </div>
+      <div class="health-assistant-widget">
+        <div class="widget-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
+            />
+          </svg>
         </div>
-
-        <div class="health-assistant-widget">
-            <div class="widget-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
-                </svg>
-            </div>
-            <div class="widget-content">
-                <h3>Personal Health Assistant</h3>
-                <p>Get personalized health recommendations</p>
-                <a href="/health_assis" class="open-assistant-btn">Open Assistant</a>
-            </div>
+        <div class="widget-content">
+          <h3>Personal Health Assistant</h3>
+          <p>Get personalized health recommendations</p>
+          <a href="/health_assis" class="open-assistant-btn">Open Assistant</a>
         </div>
+      </div>
 
-        <div id="chatbot-toggle" class="chatbot-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
-                <path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
-            </svg>
-        </div>
+      <div id="chatbot-toggle" class="chatbot-toggle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"
+          />
+          <path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
+        </svg>
+      </div>
 
-        <div id="chatbot-container" class="chatbot-container" style="display: none;">
-            <div class="chatbot-header">
-                Medical Q&A Chatbot
-            </div>
-            <div class="chatbot-messages" id="chatbot-messages">
-                <!-- Messages will appear here -->
-            </div>
-            <div class="chatbot-input-container">
-                <input type="text" id="chatbot-input" placeholder="Ask a question...">
-                <button id="chatbot-send-btn">Send</button>
-                <button id="stop-btn" style="display: none;">Stop</button>
-            </div>
+      <div
+        id="chatbot-container"
+        class="chatbot-container"
+        style="display: none"
+      >
+        <div class="chatbot-header">Medical Q&A Chatbot</div>
+        <div class="chatbot-messages" id="chatbot-messages">
+          <!-- Messages will appear here -->
         </div>
+        <div class="chatbot-input-container">
+          <input
+            type="text"
+            id="chatbot-input"
+            placeholder="Ask a question..."
+          />
+          <button id="chatbot-send-btn">Send</button>
+          <button id="stop-btn" style="display: none">Stop</button>
+        </div>
+      </div>
     </div>
-
-
-
-
 
     <script src="{% static 'main.js' %}"></script>
     <script type="module" src="{% static 'chatbot.js' %}"></script>
-</body>
-
+  </body>
 </html>

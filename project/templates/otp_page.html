@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %}OTP Verification{% endblock title %}
+{% block head_link %}
+<link rel="stylesheet" href="http://127.0.0.1:8000/static/home.module.css" />
+{% endblock head_link %} {% block body %}
+
+<div class="container">
+    <h1>Verify Your OTP</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="otp_code">OTP Code:</label>
+        <input type="text" id="otp_code" name="otp_code" required />
+
+        <button type="submit">Verify OTP</button>
+    </form>
+</div>
+
+{% endblock body %}

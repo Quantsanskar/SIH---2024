@@ -1,118 +1,136 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HealthInsight Portal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'patient.css' %}">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'patient.css' %}" />
+  </head>
 
-<body>
-    <div id="lazyLoadingContainer" class="lazyLoadingContainer" style="cursor: pointer;">
-        <div class="pulse"></div>
-        <div class="healthIcon">
-            <span class="iconPart">+</span>
-        </div>
-        <div class="loadingText">HealthConnect</div>
+  <body>
+    <div
+      id="lazyLoadingContainer"
+      class="lazyLoadingContainer"
+      style="cursor: pointer"
+    >
+      <div class="pulse"></div>
+      <div class="healthIcon">
+        <span class="iconPart">+</span>
+      </div>
+      <div class="loadingText">HealthConnect</div>
     </div>
-    <div id="maincontent" class="maincontent" style="display: none;">
-        <header>
-            <div class="container">
-                <div class="logo" onclick="window.location.href='/'" style="cursor: pointer;">
-                    <i class="fas fa-heartbeat"></i>
-                    <span>HealthConnect</span>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#home" class="active">Home</a></li>
-                        <li><a href="#submit">Submit Report</a></li>
-                        <li><a href="#doctors">Find Doctors</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </nav>
-                <!-- <button class="login-btn">Login / Sign Up</button> -->
+    <div id="maincontent" class="maincontent" style="display: none">
+      <header>
+        <div class="container">
+          <div
+            class="logo"
+            onclick="window.location.href='/'"
+            style="cursor: pointer"
+          >
+            <i class="fas fa-heartbeat"></i>
+            <span>HealthConnect</span>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="#home" class="active">Home</a></li>
+              <li><a href="#submit">Submit Report</a></li>
+              <li><a href="#doctors">Find Doctors</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </nav>
+          <!-- <button class="login-btn">Login / Sign Up</button> -->
+          <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        </div>
+      </header>
+
+      <main>
+        <section id="home" class="hero">
+          <div class="container">
+            <h1>Get Your Health Report Analyzed in Minutes</h1>
+            <p>
+              Our AI-powered system provides quick and accurate health insights,
+              connecting you with top specialists when needed.
+            </p>
+            <button class="cta-btn">Submit Your Report Now</button>
+          </div>
+        </section>
+
+        <section id="features">
+          <div class="container">
+            <h2>Why Choose HealthConnect?</h2>
+            <div class="feature-grid">
+              <div class="feature-item">
+                <i class="fas fa-robot"></i>
+                <h3>AI-Powered Analysis</h3>
+                <p>Get instant insights from our advanced AI system.</p>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-user-md"></i>
+                <h3>Expert Doctors</h3>
+                <p>Connect with top specialists in your area.</p>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-lock"></i>
+                <h3>Secure & Private</h3>
+                <p>
+                  Your health data is protected with industry-leading security.
+                </p>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-clock"></i>
+                <h3>24/7 Availability</h3>
+                <p>Access your health information anytime, anywhere.</p>
+              </div>
             </div>
-        </header>
+          </div>
+        </section>
 
-        <main>
-            <section id="home" class="hero">
-                <div class="container">
-                    <h1>Get Your Health Report Analyzed in Minutes</h1>
-                    <p>Our AI-powered system provides quick and accurate health insights, connecting you with top
-                        specialists when needed.</p>
-                    <button class="cta-btn">Submit Your Report Now</button>
-                </div>
-            </section>
+        <section id="submit" class="report-submission">
+          <div class="container">
+            <h2>Submit Your Health Report</h2>
+            <form id="report-form">
+              <div class="form-group">
+                <label for="report-text">Enter your report or symptoms:</label>
+                <textarea
+                  id="report-text"
+                  rows="6"
+                  placeholder="Describe your symptoms or paste your report here..."
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="file-upload">Or upload a file:</label>
+                <input type="file" id="file-upload" accept=".pdf,.doc,.docx" />
+              </div>
+              <div class="form-group">
+                <label for="analysis-type">Analysis Type:</label>
+                <select id="analysis-type">
+                  <option value="general">General</option>
+                  <option value="detailed">Detailed</option>
+                </select>
+              </div>
+              <button type="submit" class="submit-btn">Analyze Report</button>
+            </form>
+          </div>
+        </section>
+      </main>
 
-            <section id="features">
-                <div class="container">
-                    <h2>Why Choose HealthConnect?</h2>
-                    <div class="feature-grid">
-                        <div class="feature-item">
-                            <i class="fas fa-robot"></i>
-                            <h3>AI-Powered Analysis</h3>
-                            <p>Get instant insights from our advanced AI system.</p>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-user-md"></i>
-                            <h3>Expert Doctors</h3>
-                            <p>Connect with top specialists in your area.</p>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-lock"></i>
-                            <h3>Secure & Private</h3>
-                            <p>Your health data is protected with industry-leading security.</p>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-clock"></i>
-                            <h3>24/7 Availability</h3>
-                            <p>Access your health information anytime, anywhere.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+      <footer>
+        <div class="container">
+          <p>&copy; 2024 HealthConnect Portal. All rights reserved.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </footer>
 
-            <section id="submit" class="report-submission">
-                <div class="container">
-                    <h2>Submit Your Health Report</h2>
-                    <form id="report-form">
-                        <div class="form-group">
-                            <label for="report-text">Enter your report or symptoms:</label>
-                            <textarea id="report-text" rows="6"
-                                placeholder="Describe your symptoms or paste your report here..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="file-upload">Or upload a file:</label>
-                            <input type="file" id="file-upload" accept=".pdf,.doc,.docx">
-                        </div>
-                        <div class="form-group">
-                            <label for="analysis-type">Analysis Type:</label>
-                            <select id="analysis-type">
-                                <option value="general">General</option>
-                                <option value="detailed">Detailed</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="submit-btn">Analyze Report</button>
-                    </form>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <div class="container">
-                <p>&copy; 2024 HealthConnect Portal. All rights reserved.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </footer>
-
-        <!-- <div id="login-modal" class="modal">
+      <!-- <div id="login-modal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Login / Sign Up</h2>
@@ -127,6 +145,5 @@
     </div>
 
     <script src="{% static 'patient.js' %}"></script>
-</body>
-
+  </body>
 </html>
