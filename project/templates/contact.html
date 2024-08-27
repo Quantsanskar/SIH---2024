@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech-Med Contact Form</title>
+    <link rel="stylesheet" href="{% static 'contact.css' %}">
+</head>
+<body>
+    <div id="lazyLoadingContainer" class="lazyLoadingContainer" style="cursor: pointer;">
+        <div class="pulse"></div>
+        <div class="healthIcon">
+            <span class="iconPart">+</span>
+        </div>
+        <div class="loadingText">HealthConnect</div>
+    </div>
+    <div class="container" id="container" style="display: none";>
+        <div class="form-container">
+            <h1>Contact Us</h1>
+            <form id="contactForm">
+                <div class="input-group">
+                    <input type="text" id="name" required>
+                    <label for="name">Name</label>
+                    <div class="icon-container">
+                        <i class="icon user-icon"></i>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" required>
+                    <label for="email">Email</label>
+                    <div class="icon-container">
+                        <i class="icon email-icon"></i>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <textarea id="message" required></textarea>
+                    <label for="message">Message</label>
+                    <div class="icon-container">
+                        <i class="icon message-icon"></i>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+        <div class="decoration">
+            <div class="circle tech"></div>
+            <div class="circle med"></div>
+        </div>
+    </div>
+    <script src="{% static 'contact.js' %}"></script>
+</body>
+</html>

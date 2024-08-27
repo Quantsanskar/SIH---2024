@@ -21,3 +21,6 @@ def patient_portal(request):
 
 def health_assis(request):
     return render(request,"healthAssistant.html")
+
+def contact(request):
+    return render(request,"contact.html")
