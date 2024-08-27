@@ -85,11 +85,14 @@ async function generateRecommendations() {
 
     Please provide detailed recommendations in the following format:
     1. Diet Plan:
-    2. Meal Recipes:
+    2. Meal Recipes in details like how to prepare it from scratch:
     3. Health Precautions:
     4. Safety Guidelines:
     And specially provide the current diease pattern accoding to who data from which maximum patient are suffering and
-    always generate an unique and engazing article to educate the user about the same `;
+    always generate an unique and engazing article to educate the user about the same
+    Also suggest home remedy or general household methods to cure the current medical condition of the user 
+    And provide the meal recipies and diet plan in details and try to suggest the easily aavailable meal spcially in India
+     `;
 
     try {
         const result = await model.generateContent(prompt);
