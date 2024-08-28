@@ -9,7 +9,7 @@ html {
     display: flex;
     flex-direction: column;
     background-color: #f0f8ff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .header {
@@ -18,6 +18,7 @@ html {
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar {
@@ -33,6 +34,11 @@ html {
     font-size: 1.8rem;
     font-weight: bold;
     color: #4a90e2;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .logo span {
@@ -49,11 +55,12 @@ html {
     text-decoration: none;
     color: #333;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .navLinks a:hover {
     color: #4a90e2;
+    transform: translateY(-2px);
 }
 
 .main {
@@ -68,25 +75,60 @@ html {
 
 .hero {
     grid-column: 1 / -1;
-    background-image: url('https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80');
     background-size: cover;
     background-position: center;
     color: white;
     text-align: center;
     padding: 4rem 2rem;
     border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.hero:hover {
+    transform: translateY(-5px);
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.hero p {
-    font-size: 1.4rem;
+.tagline {
+    font-size: 1.8rem;
     margin-bottom: 2rem;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    min-height: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tagline-text {
+    display: inline-block;
+}
+
+.cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background-color: #fff;
+    margin-left: 5px;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
 .cta {
@@ -101,17 +143,18 @@ html {
     font-size: 1.1rem;
     border-radius: 25px;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    border: none;
+    font-weight: 600;
 }
 
 .primaryBtn {
     background-color: #4a90e2;
     color: white;
-    border: 2px solid white;
 }
 
 .primaryBtn:hover {
-    background-color: #629cdf;
+    background-color: #3a7bc8;
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -119,29 +162,34 @@ html {
 .secondaryBtn {
     background-color: white;
     color: #4a90e2;
-    border: 2px solid #4a90e2;
 }
 
 .secondaryBtn:hover {
+    background-color: #f0f0f0;
     transform: translateY(-3px);
-    background-color: rgb(228, 226, 226);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .features,
 .about,
 .contact {
-    font-size: 1.5rem;
     background-color: white;
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.features:hover,
+.about:hover,
+.contact:hover {
+    transform: translateY(-5px);
 }
 
 .features h2,
 .about h2,
 .contact h2 {
-    font-size: 2rem;
+    font-size: 2.3rem;
     color: #333;
     margin-bottom: 1.5rem;
     text-align: center;
@@ -149,7 +197,7 @@ html {
 
 .featureGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
@@ -158,11 +206,17 @@ html {
     padding: 1.5rem;
     border-radius: 10px;
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .featureCard:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.featureIcon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
 }
 
 .featureCard h3 {
@@ -200,10 +254,11 @@ html {
     margin: 0 0.5rem;
     text-decoration: none;
     font-size: 1.2rem;
+    transition: color 0.3s ease;
 }
 
 .socialLinks a:hover {
-    text-decoration: underline;
+    color: #f0f0f0;
 }
 
 .lazyLoadingContainer {
@@ -248,6 +303,26 @@ html {
     align-items: center;
     position: relative;
     z-index: 1;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
 }
 
 .iconPart {
@@ -294,35 +369,6 @@ html {
     }
 }
 
-@media (max-width: 768px) {
-    .main {
-        grid-template-columns: 1fr;
-    }
-
-    .navbar {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .navLinks {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero p {
-        font-size: 1.2rem;
-    }
-
-    .cta {
-        flex-direction: column;
-    }
-}
-
 .health-assistant-widget {
     position: fixed;
     bottom: 20px;
@@ -356,6 +402,11 @@ html {
     width: 30px;
     height: 30px;
     fill: white;
+    transition: transform 0.3s ease;
+}
+
+.health-assistant-widget:hover .widget-icon svg {
+    transform: rotate(360deg);
 }
 
 .widget-content {
@@ -388,15 +439,80 @@ html {
     border-radius: 20px;
     font-size: 14px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .open-assistant-btn:hover {
     background-color: #f0f0f0;
+    transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
+    .main {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .navLinks {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .tagline {
+        font-size: 1.4rem;
+    }
+
+    .cta {
+        flex-direction: column;
+    }
+
+    .health-assistant-widget {
+        right: 20px;
+    }
+
     .health-assistant-widget:hover {
         width: 250px;
     }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.features,
+.about,
+.contact {
+    animation: fadeIn 1s ease-out;
+}
+
+.featureCard {
+    animation: fadeIn 1s ease-out;
+    animation-fill-mode: both;
+}
+
+.featureCard:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.featureCard:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.featureCard:nth-child(3) {
+    animation-delay: 0.6s;
 }
