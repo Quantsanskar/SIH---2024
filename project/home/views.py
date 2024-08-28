@@ -151,6 +151,15 @@ def login(request):
 def patient_portal(request):
     if "patient_id" not in request.session:
         return redirect("login")
+    
+    if request.method == "POST":
+        report_text = request.POST.get("report-text")
+        file = request.POST.get("file-upload")
+        analysis_type = request.POST.get("analysis-type")
+        
+        data = models.HealthReport(report_text = report_text, file = file, analysis_type = analysis_type)
+        data.save()
+        return redirect("patient_portal")
 
     return render(request, "patient_portal.html")
 

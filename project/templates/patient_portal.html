@@ -93,7 +93,8 @@
         <section id="submit" class="report-submission">
           <div class="container">
             <h2>Submit Your Health Report</h2>
-            <form id="report-form">
+            <form id="report-form" method="POST" action="/patient_portal" enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="form-group">
                 <label for="report-text">Enter your report or symptoms:</label>
                 <textarea
