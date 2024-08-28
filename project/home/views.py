@@ -171,6 +171,8 @@ def logout(request):
 
 
 def health_assis(request):
+    if request.method == "POST":
+        name = request.POST.get("")
     return render(request, "healthAssistant.html")
 
 

@@ -51,3 +51,27 @@ class HealthReport(models.Model):
         return self.file.name
 
 
+class Contact(models.Model):
+    name = models.CharField(max_length=256,blank=True,null=True)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
+    
+class PersonalAssistant(models.Model):
+    name = models.CharField(max_length=256,blank=True,null=True)
+    age = models.IntegerField()
+    gender = models.CharField(max_length=32)
+    height = models.IntegerField()
+    weight = models.IntegerField()
+    exercise = models.CharField(max_length=32)
+    diet = models.CharField(max_length=256)
+    medicalConditions = models.TextField()
+    stress = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.name
+    
+class ChatBot(models.Model):
+    pass
