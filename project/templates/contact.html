@@ -18,23 +18,24 @@
     <div class="container" id="container" style="display: none";>
         <div class="form-container">
             <h1>Contact Us</h1>
-            <form id="contactForm">
+            <form id="contactForm" metthod = "POST" action="/contact">
+                {% csrf_token %}
                 <div class="input-group">
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" name="name" required>
                     <label for="name">Name</label>
                     <div class="icon-container">
                         <i class="icon user-icon"></i>
                     </div>
                 </div>
                 <div class="input-group">
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" name = "email" required>
                     <label for="email">Email</label>
                     <div class="icon-container">
                         <i class="icon email-icon"></i>
                     </div>
                 </div>
                 <div class="input-group">
-                    <textarea id="message" required></textarea>
+                    <textarea id="message" name="message" required></textarea>
                     <label for="message">Message</label>
                     <div class="icon-container">
                         <i class="icon message-icon"></i>

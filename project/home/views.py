@@ -173,9 +173,28 @@ def logout(request):
 
 def health_assis(request):
     if request.method == "POST":
-        name = request.POST.get("")
+        name = request.POST.get("name")
+        age = request.POST.get("age")
+        gender = request.POST.get("gender")
+        height = request.POST.get("height")
+        weight = request.POST.get("weight")
+        exercise = request.POST.get("exercise")
+        diet = request.POST.get("diet")
+        medicalConditions = request.POST.get("medicalConditions")
+        stress = request.POST.get("stress")
+
+        data = models.PersonalAssistant(name = name, age = age, gender = gender, height = height, weight = weight, exercise = exercise, diet = diet, medicalConditions = medicalConditions, stress = stress)
+        data.save()
     return render(request, "healthAssistant.html")
 
 
 def contact(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+
+        data = models.Contact(name = name, email = email, message = message)
+        data.save()
+        
     return render(request, "contact.html")

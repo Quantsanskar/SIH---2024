@@ -1,11 +1,11 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Health Assistant</title>
-    <link rel="stylesheet" href="static/healthAssistant.css">
+    <link rel="stylesheet" href="{% static 'healthAssistant.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -29,6 +29,22 @@
             <div id="safetyGuidelines" class="recommendation-box"></div>
         </div>
     </div>
-    <script type="module" src="static/healthAssistant.js"></script>
+
+    <!-- Hidden form for submitting data -->
+    <form id="hidden-form" method="POST" action={% url "health_assis" %} style="display: none;">
+        {% csrf_token %}
+        <input type="hidden" name="name" id="hidden-name">
+        <input type="hidden" name="age" id="hidden-age">
+        <input type="hidden" name="gender" id="hidden-gender">
+        <input type="hidden" name="height" id="hidden-height">
+        <input type="hidden" name="weight" id="hidden-weight">
+        <input type="hidden" name="occupation" id="hidden-occupation">
+        <input type="hidden" name="exercise" id="hidden-exercise">
+        <input type="hidden" name="diet" id="hidden-diet">
+        <input type="hidden" name="medicalConditions" id="hidden-medicalConditions">
+        <input type="hidden" name="stress" id="hidden-stress">
+    </form>
+
+    <script type="module" src="{% static 'healthAssistant.js' %}"></script>
 </body>
 </html>

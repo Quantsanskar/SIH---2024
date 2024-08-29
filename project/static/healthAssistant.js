@@ -5,16 +5,16 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 const questions = [
-    { id: 'name', text: 'What is your name?', type: 'text' },
-    { id: 'age', text: 'What is your age?', type: 'number' },
-    { id: 'gender', text: 'What is your gender?', type: 'select', options: ['Male', 'Female', 'Other'] },
-    { id: 'height', text: 'What is your height (in cm)?', type: 'number' },
-    { id: 'weight', text: 'What is your weight (in kg)?', type: 'number' },
-    { id: 'occupation', text: 'What is your occupation?', type: 'text' },
-    { id: 'exercise', text: 'How often do you exercise?', type: 'select', options: ['Never', 'Occasionally', 'Regularly', 'Daily'] },
-    { id: 'diet', text: 'How would you describe your current diet?', type: 'select', options: ['Balanced', 'High in processed foods', 'Vegetarian', 'Vegan', 'Other'] },
-    { id: 'medicalConditions', text: 'Do you have any existing medical conditions?', type: 'text' },
-    { id: 'stress', text: 'How would you rate your stress level?', type: 'select', options: ['Low', 'Moderate', 'High', 'Very High'] }
+    { id: 'name', name: 'name', text: 'What is your name?', type: 'text' },
+    { id: 'age', name: 'age', text: 'What is your age?', type: 'number' },
+    { id: 'gender', name: 'gender', text: 'What is your gender?', type: 'select', options: ['Male', 'Female', 'Other'] },
+    { id: 'height', name: 'height', text: 'What is your height (in cm)?', type: 'number' },
+    { id: 'weight', name: 'weight', text: 'What is your weight (in kg)?', type: 'number' },
+    { id: 'occupation', name: 'occupation', text: 'What is your occupation?', type: 'text' },
+    { id: 'exercise', name: 'exercise', text: 'How often do you exercise?', type: 'select', options: ['Never', 'Occasionally', 'Regularly', 'Daily'] },
+    { id: 'diet',name: 'diet', text: 'How would you describe your current diet?', type: 'select', options: ['Balanced', 'High in processed foods', 'Vegetarian', 'Vegan', 'Other'] },
+    { id: 'medicalConditions',name: 'medicalConditions', text: 'Do you have any existing medical conditions?', type: 'text' },
+    { id: 'stress',name: 'stress', text: 'How would you rate your stress level?', type: 'select', options: ['Low', 'Moderate', 'High', 'Very High'] }
 ];
 
 let currentQuestionIndex = 0;
@@ -59,11 +59,27 @@ function nextQuestion() {
         showSubmitButton();
     }
 }
-
 function showSubmitButton() {
     document.getElementById('questionContainer').style.display = 'none';
     document.getElementById('submitBtn').style.display = 'block';
-    document.getElementById('submitBtn').addEventListener('click', generateRecommendations);
+    document.getElementById('submitBtn').addEventListener('click', () => {
+        generateRecommendations().then(() => {
+            submitForm();  // Ensure this is called after recommendations are generated
+        });
+    });
+}
+
+function submitForm() {
+    // Populate the hidden form fields with the answers
+    Object.keys(answers).forEach(key => {
+        const hiddenInput = document.getElementById(`hidden-${key}`);
+        if (hiddenInput) {
+            hiddenInput.value = answers[key];
+        }
+    });
+
+    // Submit the hidden form
+    document.getElementById('hidden-form').submit();
 }
 
 async function generateRecommendations() {
@@ -113,6 +129,12 @@ async function generateRecommendations() {
     
     document.getElementById('submitBtn').style.display = 'none';
 }
+
+
+
+
+
+
 
 function typeText(element, text) {
     let index = 0;
