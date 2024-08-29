@@ -93,22 +93,24 @@
         <section id="submit" class="report-submission">
           <div class="container">
             <h2>Submit Your Health Report</h2>
-            <form id="report-form">
+            <form id="report-form" method="POST" action="/patient_portal" enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="form-group">
                 <label for="report-text">Enter your report or symptoms:</label>
                 <textarea
                   id="report-text"
+                  name = "report-text"
                   rows="6"
                   placeholder="Describe your symptoms or paste your report here..."
                 ></textarea>
               </div>
               <div class="form-group">
                 <label for="file-upload">Or upload a file:</label>
-                <input type="file" id="file-upload" accept=".pdf,.doc,.docx" />
+                <input type="file" id="file-upload" name = "file-upload" accept=".pdf,.doc,.docx" />
               </div>
               <div class="form-group">
                 <label for="analysis-type">Analysis Type:</label>
-                <select id="analysis-type">
+                <select id="analysis-type" name="analysis-type">
                   <option value="general">General</option>
                   <option value="detailed">Detailed</option>
                 </select>
