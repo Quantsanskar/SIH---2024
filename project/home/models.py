@@ -65,10 +65,12 @@ class PersonalAssistant(models.Model):
     gender = models.CharField(max_length=32)
     height = models.IntegerField()
     weight = models.IntegerField()
+    occupation = models.CharField(max_length=256,null=True,blank=True)
     exercise = models.CharField(max_length=32)
     diet = models.CharField(max_length=256)
     medicalConditions = models.TextField()
     stress = models.CharField(max_length=32)
+    reccomendations = models.TextField(null=True,blank=True)
 
     def __str__(self):
         return self.name

@@ -3,7 +3,7 @@ from . import models
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from .models import Patient
-from .utils import generate_otp, send_otp_email
+from .utils import generate_otp, send_otp_email, generate_content
 
 
 # Create your views here.
@@ -178,13 +178,47 @@ def health_assis(request):
         gender = request.POST.get("gender")
         height = request.POST.get("height")
         weight = request.POST.get("weight")
+        occupation = request.POST.get("occupation")
         exercise = request.POST.get("exercise")
         diet = request.POST.get("diet")
         medicalConditions = request.POST.get("medicalConditions")
         stress = request.POST.get("stress")
 
-        data = models.PersonalAssistant(name = name, age = age, gender = gender, height = height, weight = weight, exercise = exercise, diet = diet, medicalConditions = medicalConditions, stress = stress)
+        
+        prompt_text = f"""Based on the following health information, provide personalized recommendations for a diet plan, meal recipes, health precautions, and safety guidelines. Include specific advice from WHO guidelines where applicable. Here's the patient information:
+
+    Age: {age}
+    Gender: {gender}
+    Height: {height} cm
+    Weight: {weight} kg
+    Occupation: {occupation}
+    Exercise Frequency: {exercise}
+    Current Diet: {diet}
+    Medical Conditions: {medicalConditions}
+    Stress Level: {stress}
+
+    Please provide detailed recommendations in the following format:
+    1. Diet Plan:
+    2. Meal Recipes in details like how to prepare it from scratch:
+    3. Health Precautions:
+    4. Safety Guidelines:
+    And specially provide the current diease pattern accoding to who data from which maximum patient are suffering and
+    always generate an unique and engazing article to educate the user about the same
+    Also suggest home remedy or general household methods to cure the current medical condition of the user 
+    And provide the meal recipies and diet plan in details and try to suggest the easily aavailable meal spcially in India
+     """
+        gemini_response = generate_content(prompt_text)
+        gemini_response = gemini_response["candidates"][0]["content"]["parts"][0]["text"]
+        output = ""
+        for i in gemini_response:
+            if i != "*" and i != "#":
+                output += i
+        data = models.PersonalAssistant(name = name, age = age, gender = gender, height = height, weight = weight, occupation = occupation, exercise = exercise, diet = diet, medicalConditions = medicalConditions, stress = stress, reccomendations = output)
         data.save()
+
+        return render(request, "recommendation.html", {"output": output})
+        
+
     return render(request, "healthAssistant.html")
 
 
@@ -196,5 +230,5 @@ def contact(request):
 
         data = models.Contact(name = name, email = email, message = message)
         data.save()
-        
+
     return render(request, "contact.html")

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Recommendations</title>
+    <link rel="stylesheet" href="{% static 'recommendation.css' %}">
+    <style>
+        .recommendations {
+            margin: 20px;
+        }
+        .recommendations h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="recommendationContainer" class="recommendations">
+        <h2>Personalized Health Recommendations</h2>
+        <p>{{ output|safe }}</p>
+    </div>
+</body>
+</html>
