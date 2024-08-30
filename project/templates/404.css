@@ -1,18 +1,22 @@
 body {
-    padding: 10%;
-    margin-top: 5%;
+    padding: 8%;
+    margin-top: 4%;
     font-family: Arial, sans-serif;
     text-align: center;
 }
+h1 {
+    font-size: 48px;
+}
 .btn {
-    background-color: #4CAF50;
+    background-color: #4a90e2;
     color: #ffffff;
+    font-size: 18px;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
-    margin: 7px;
+    border-radius: 10px;
+    margin: 4px;
     cursor: pointer;
 }
 .btn:hover {
-    background-color: #3e8e41;
+    background-color: #5d98db;
 }
