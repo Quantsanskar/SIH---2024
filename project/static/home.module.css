@@ -186,7 +186,7 @@ html {
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    height: 150vh;
+    height: 160vh;
 }
 .about .firstsection{
     margin-bottom: 250px;
@@ -244,7 +244,7 @@ html {
 
 .about p,
 .contact p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #444;
     line-height: 1.6;
 }
