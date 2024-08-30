@@ -1,24 +1,22 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Recommendations</title>
-    <link rel="stylesheet" href="/static/recommendation.css?v=1.0">
-    <style>
-        .recommendations {
-            margin: 20px;
-        }
-        .recommendations h2 {
-            color: #333;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/recommendation.css?v=1.1">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="recommendationContainer" class="recommendations">
-        <h2>Personalized Health Recommendations</h2>
-        <p>{{ output|safe }}</p>
+    <div class="container">
+        <header>
+            <h1>Your Personalized Health Recommendations</h1>
+        </header>
+        <main id="recommendationContainer" class="recommendations">
+            {{ output|safe }}
+        </main>
     </div>
 </body>
 </html>

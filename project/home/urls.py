@@ -15,4 +15,5 @@ urlpatterns = [
     path("contact", views.contact, name="contact"),
     path("logout", views.logout, name="logout"),
     path("verify-otp/", views.verify_otp, name="verify_otp"),
+    path("doctor_sugg",views.doctor_sugg,name="doctor_sugg")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,7 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from .models import Patient
 from .utils import generate_otp, send_otp_email, generate_content
-
+import re
+from django.utils.safestring import mark_safe
 
 # Create your views here.
 def index(request):
@@ -151,14 +152,15 @@ def login(request):
 def patient_portal(request):
     if "patient_id" not in request.session:
         return redirect("login")
-    
+
     if request.method == "POST":
         report_text = request.POST.get("report-text")
         print(report_text)
         file = request.FILES.get("file-upload")
         analysis_type = request.POST.get("analysis-type")
-        
-        data = models.HealthReport(report_text = report_text, file = file, analysis_type = analysis_type)
+
+        data = models.HealthReport(
+            report_text=report_text, file=file, analysis_type=analysis_type)
         data.save()
         return redirect("patient_portal")
 
@@ -184,7 +186,6 @@ def health_assis(request):
         medicalConditions = request.POST.get("medicalConditions")
         stress = request.POST.get("stress")
 
-        
         prompt_text = f"""Based on the following health information, provide personalized recommendations for a diet plan, meal recipes, health precautions, and safety guidelines. Include specific advice from WHO guidelines where applicable. Here's the patient information:
 
     Age: {age}
@@ -209,17 +210,43 @@ def health_assis(request):
      """
         gemini_response = generate_content(prompt_text)
         gemini_response = gemini_response["candidates"][0]["content"]["parts"][0]["text"]
-        output = ""
-        for i in gemini_response:
-            if i != "*" and i != "#":
-                output += i
-        data = models.PersonalAssistant(name = name, age = age, gender = gender, height = height, weight = weight, occupation = occupation, exercise = exercise, diet = diet, medicalConditions = medicalConditions, stress = stress, reccomendations = output)
+
+        # Improve formatting
+        formatted_output = format_response(gemini_response)
+
+        data = models.PersonalAssistant(name=name, age=age, gender=gender, height=height, weight=weight, occupation=occupation,
+                                        exercise=exercise, diet=diet, medicalConditions=medicalConditions, stress=stress, reccomendations=formatted_output)
         data.save()
 
-        return render(request, "recommendation.html", {"output": output})
-        
+        return render(request, "recommendation.html", {"output": mark_safe(formatted_output)})
 
     return render(request, "healthAssistant.html")
+
+
+def format_response(text):
+    # Split the text into sections
+    sections = re.split(r'\d+\.', text)[1:]  # Remove the empty first element
+    formatted_sections = []
+
+    for section in sections:
+        # Remove leading/trailing whitespace
+        section = section.strip()
+
+        # Split the section title from the content
+        title, content = section.split(':', 1)
+
+        # Format the section
+        formatted_section = f"<h2>{title.strip()}</h2>"
+
+        # Split content into paragraphs and format them
+        paragraphs = content.strip().split('\n')
+        formatted_paragraphs = [
+            f"<p>{p.strip()}</p>" for p in paragraphs if p.strip()]
+
+        formatted_section += '\n'.join(formatted_paragraphs)
+        formatted_sections.append(formatted_section)
+
+    return '\n'.join(formatted_sections)
 
 
 def contact(request):
@@ -228,7 +255,11 @@ def contact(request):
         email = request.POST.get("email")
         message = request.POST.get("message")
 
-        data = models.Contact(name = name, email = email, message = message)
+        data = models.Contact(name=name, email=email, message=message)
         data.save()
 
     return render(request, "contact.html")
+
+
+def doctor_sugg(request):
+    return render(request, "doctor_sugg.html")

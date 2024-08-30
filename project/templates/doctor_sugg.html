@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Specialist Finder</title>
+    <link rel="stylesheet" href="/static/doctor_sugg.css">
+    <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.1.3/dist/generative-ai.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Medical Specialist Finder</h1>
+        </header>
+        <main>
+            <div class="search-container">
+                <input type="text" id="problem" placeholder="Enter your medical problem or specialist type">
+                <input type="text" id="location" placeholder="Enter your location">
+                <button id="search-btn">Find Specialists</button>
+            </div>
+            <div id="results" class="results-container">
+                <!-- Results will be displayed here -->
+            </div>
+        </main>
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Searching for specialists...</p>
+        </div>
+    </div>
+    <script type="module" src="/static/doctor_sugg.js"></script>
+</body>
+</html>
