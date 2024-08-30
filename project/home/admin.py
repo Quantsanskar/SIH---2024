@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Patient, HealthReport, PersonalAssistant, Contact, ChatBot
+from .models import Patient, HealthReport, PersonalAssistant, Contact, ChatBot, AnalyzedReport
 
 # Register your models here.
 
@@ -63,3 +63,4 @@ admin.site.register(HealthReport)
 admin.site.register(Contact)
 admin.site.register(PersonalAssistant)
 admin.site.register(ChatBot)
+admin.site.register(AnalyzedReport)

@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from . import models
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
-from .models import Patient
-from .utils import generate_otp, send_otp_email, generate_content
-import re
+from .models import Patient, AnalyzedReport
+from .utils import generate_otp, send_otp_email, generate_content, format_response, extract_text_from_pdf
 from django.utils.safestring import mark_safe
+
 
 # Create your views here.
 def index(request):
@@ -162,6 +162,11 @@ def patient_portal(request):
         data = models.HealthReport(
             report_text=report_text, file=file, analysis_type=analysis_type)
         data.save()
+
+        text = extract_text_from_pdf(data.file.path)
+        Analyzeda_Report = AnalyzedReport(analysis=text, report=data)
+        Analyzeda_Report.save()
+
         return redirect("patient_portal")
 
     return render(request, "patient_portal.html")
@@ -223,30 +228,7 @@ def health_assis(request):
     return render(request, "healthAssistant.html")
 
 
-def format_response(text):
-    # Split the text into sections
-    sections = re.split(r'\d+\.', text)[1:]  # Remove the empty first element
-    formatted_sections = []
 
-    for section in sections:
-        # Remove leading/trailing whitespace
-        section = section.strip()
-
-        # Split the section title from the content
-        title, content = section.split(':', 1)
-
-        # Format the section
-        formatted_section = f"<h2>{title.strip()}</h2>"
-
-        # Split content into paragraphs and format them
-        paragraphs = content.strip().split('\n')
-        formatted_paragraphs = [
-            f"<p>{p.strip()}</p>" for p in paragraphs if p.strip()]
-
-        formatted_section += '\n'.join(formatted_paragraphs)
-        formatted_sections.append(formatted_section)
-
-    return '\n'.join(formatted_sections)
 
 
 def contact(request):
