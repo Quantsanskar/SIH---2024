@@ -23,7 +23,7 @@ async function searchSpecialists() {
 
     showLoading();
 
-    const prompt = `Find and list medical specialists or hospitals for ${problem} near ${location}. Provide a list of 20 options with name, specialty, address, and contact information if available. Format the response as JSON without any markdown formatting.`;
+    const prompt = `Find and list medical specialists or hospitals for ${problem} near ${location}. Provide a list of as much options possible with name, specialty, address, and contact information if available. Format the response as JSON without any markdown formatting.`;
 
     try {
         const result = await model.generateContent(prompt);

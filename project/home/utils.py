@@ -4,7 +4,7 @@ import requests
 from django.core.mail import send_mail
 import PyPDF2
 import json
-
+import re
 
 def generate_otp():
     return "".join(random.choices(string.digits, k=6))
