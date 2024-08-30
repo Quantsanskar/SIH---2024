@@ -166,8 +166,9 @@ def patient_portal(request):
         text = extract_text_from_pdf(data.file.path)
         Analyzeda_Report = AnalyzedReport(analysis=text, report=data)
         Analyzeda_Report.save()
-
-        return redirect("patient_portal")
+        prompt_text = f"Give Suggestions for This medical report:- {text}"
+        gemini_output = generate_content(prompt_text)
+        return redirect("analyzed_report",output = gemini_output)
 
     return render(request, "patient_portal.html")
 
@@ -245,3 +246,11 @@ def contact(request):
 
 def doctor_sugg(request):
     return render(request, "doctor_sugg.html")
+
+
+def analyzed_report(request, output):
+    safe_output = mark_safe(output)
+    context = {
+        "output": safe_output
+    }
+    return render(request, "analyzed_report.html", context)
