@@ -254,3 +254,11 @@ def analyzed_report(request, output):
         "output": safe_output
     }
     return render(request, "analyzed_report.html", context)
+
+
+def privacy_policy(request):
+    return render(request, "privacy_policy.html")
+
+
+def terms_of_service(request):
+    return render(request, "tos.html")
