@@ -81,6 +81,7 @@ class ChatBot(models.Model):
 class AnalyzedReport(models.Model):
     report = models.ForeignKey(HealthReport,on_delete=models.CASCADE)
     analysis = models.TextField()
+    gemini_output = models.TextField(null=True, blank=True)
     analyzed_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
