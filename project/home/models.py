@@ -77,3 +77,11 @@ class PersonalAssistant(models.Model):
     
 class ChatBot(models.Model):
     pass
+
+class AnalyzedReport(models.Model):
+    report = models.ForeignKey(HealthReport,on_delete=models.CASCADE)
+    analysis = models.TextField()
+    analyzed_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.report.file.name

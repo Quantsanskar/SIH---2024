@@ -2,7 +2,9 @@ import random
 import string
 import requests
 from django.core.mail import send_mail
-
+import PyPDF2
+import json
+import re
 
 def generate_otp():
     return "".join(random.choices(string.digits, k=6))
@@ -14,8 +16,7 @@ def send_otp_email(email, otp_code):
     send_mail(subject, message, "dapselio65@gmail.com", [email])
 
 
-import requests
-import json
+
 
 def generate_content(prompt_text):
     api_key = "AIzaSyDnzM3GQINumQkNK1q2Azv3LAVo-YWX76w"
@@ -50,6 +51,47 @@ def generate_content(prompt_text):
             }
     except requests.RequestException as e:
         return {"error": str(e)}
+
+
+
+
+
+def extract_text_from_pdf(file_path):
+    pdf_file_obj = open(file_path, 'rb')
+    pdf_reader = PyPDF2.PdfReader(pdf_file_obj) # Use PdfReader instead of PdfFileReader
+    num_pages = len(pdf_reader.pages) # get num_pages using len(pdf_reader.pages)
+    text = ''
+    for page in range(num_pages):
+        page_obj = pdf_reader.pages[page] # Access pages using pdf_reader.pages[page]
+        text += page_obj.extract_text()
+    pdf_file_obj.close()
+    return text
+
+
+def format_response(text):
+    # Split the text into sections
+    sections = re.split(r'\d+\.', text)[1:]  # Remove the empty first element
+    formatted_sections = []
+
+    for section in sections:
+        # Remove leading/trailing whitespace
+        section = section.strip()
+
+        # Split the section title from the content
+        title, content = section.split(':', 1)
+
+        # Format the section
+        formatted_section = f"<h2>{title.strip()}</h2>"
+
+        # Split content into paragraphs and format them
+        paragraphs = content.strip().split('\n')
+        formatted_paragraphs = [
+            f"<p>{p.strip()}</p>" for p in paragraphs if p.strip()]
+
+        formatted_section += '\n'.join(formatted_paragraphs)
+        formatted_sections.append(formatted_section)
+
+    return '\n'.join(formatted_sections)
 
 
 
