@@ -19,7 +19,7 @@ def send_otp_email(email, otp_code):
 
 
 def generate_content(prompt_text):
-    api_key = "AIzaSyDnzM3GQINumQkNK1q2Azv3LAVo-YWX76w"
+    api_key = "AIzaSyDayOQRavI4uxYYtKw_j1AuL90PPGI9U2A"
     url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent'
     headers = {
         'Content-Type': 'application/json',
@@ -66,6 +66,14 @@ def extract_text_from_pdf(file_path):
         text += page_obj.extract_text()
     pdf_file_obj.close()
     return text
+
+
+def format_stars(text):
+    out = ""
+    for i in text:
+        if i != "*" and i != "#":
+            out += i
+
 
 
 def format_response(text):

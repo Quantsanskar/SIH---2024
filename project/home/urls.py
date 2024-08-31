@@ -18,5 +18,5 @@ urlpatterns = [
     path("terms_of_service/", views.terms_of_service, name="terms_of_service"),
     path("privacy_policy/", views.privacy_policy, name="privacy_policy"),
     path("doctor_sugg",views.doctor_sugg,name="doctor_sugg"),
-    path("analyzed_report/<str:output>/",views.analyzed_report, name="analyzed_report"),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

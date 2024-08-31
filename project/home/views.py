@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from . import models
+from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from .models import Patient, AnalyzedReport
-from .utils import generate_otp, send_otp_email, generate_content, format_response, extract_text_from_pdf
+from .utils import generate_otp, send_otp_email, generate_content, format_response, extract_text_from_pdf, format_stars
 from django.utils.safestring import mark_safe
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -164,11 +166,18 @@ def patient_portal(request):
         data.save()
 
         text = extract_text_from_pdf(data.file.path)
-        Analyzeda_Report = AnalyzedReport(analysis=text, report=data)
-        Analyzeda_Report.save()
+        
+
+        
         prompt_text = f"Give Suggestions for This medical report:- {text}"
         gemini_output = generate_content(prompt_text)
-        return redirect("analyzed_report",output = gemini_output)
+        #t1 = gemini_output["candidates"][0]["content"]
+        #t2 = format_stars(t1)
+        
+        Analyzed_Report = AnalyzedReport(analysis=text, report=data,gemini_output= gemini_output)
+        Analyzed_Report.save()
+        
+        return render(request, "analyzed_report.html",{"output": mark_safe(gemini_output)})
 
     return render(request, "patient_portal.html")
 
