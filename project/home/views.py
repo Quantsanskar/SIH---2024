@@ -257,10 +257,17 @@ def doctor_sugg(request):
     return render(request, "doctor_sugg.html")
 
 
-# def analyzed_report(request, report_id):
-#     analyzed_report = get_object_or_404(AnalyzedReport, id=report_id)
+def analyzed_report(request, output):
+    safe_output = mark_safe(output)
+    context = {
+        "output": safe_output
+    }
+    return render(request, "analyzed_report.html", context)
 
-#     context = {
-#         "output": mark_safe(analyzed_report.gemini_output)
-#     }
-#     return render(request, "analyzed_report.html", context)
+
+def privacy_policy(request):
+    return render(request, "privacy_policy.html")
+
+
+def terms_of_service(request):
+    return render(request, "tos.html")
