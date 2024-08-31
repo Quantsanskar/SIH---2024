@@ -21,9 +21,9 @@
         </div>
         <ul class="navLinks">
           <li><a href="patient_portal">Patient Portal</a></li>
-          <li><a href="#features">✨ Features</a></li>
-          <li><a href="#about">ℹ️ About</a></li>
-          <li><a href="#contact">📞 Contact</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -37,12 +37,12 @@
         </div>
         {% endfor %}
         {% endif %}
-        <h1 class="title">🏥 New Patient Registration</h1>
+        <h1 class="title">New Patient Registration</h1>
         <p id="error" class="error"></p>
         <form id="registrationForm" class="form" method="POST" action="/register">
           {% csrf_token %}
           <div class="section">
-            <h2>👤 Personal Information</h2>
+            <h2>Personal Information</h2>
             <div class="inputGroup">
               <input type="text" name="firstName" placeholder="First Name" required class="input" />
               <input type="text" name="lastName" placeholder="Last Name" required class="input" />
