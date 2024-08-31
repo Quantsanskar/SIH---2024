@@ -42,33 +42,33 @@
         <form id="registrationForm" class="form" method="POST" action="/register">
           {% csrf_token %}
           <div class="section">
-            <h2>Personal Information</h2>
+            <h2 style="margin-left: 30%;">Personal Information</h2>
             <div class="inputGroup">
               <input type="text" name="firstName" placeholder="First Name" required class="input" />
               <input type="text" name="lastName" placeholder="Last Name" required class="input" />
             </div>
-            <input type="email" name="email" placeholder="📧 Email" required class="input" />
+            <input type="email" name="email" placeholder="📧 Email" required class="input" style="width: 95%;" />
             <div class="inputGroup">
               <input type="password" name="password" placeholder="🔒 Password" required class="input" />
               <input type="password" name="confirmPassword" placeholder="🔒 Confirm Password" required class="input" />
             </div>
             <div class="inputGroup">
               <input type="date" name="dateOfBirth" required class="input" />
-              <select name="gender" required class="input">
+              <select name="gender" required class="input" style="width: 108.5%;">
                 <option value="">Select Gender</option>
                 <option value="male">♂️ Male</option>
                 <option value="female">♀️ Female</option>
                 <option value="other">⚧ Other</option>
               </select>
             </div>
-            <input type="tel" name="phoneNumber" placeholder="📞 Phone Number" class="input" />
-            <textarea name="address" placeholder="🏠 Address" class="textarea"></textarea>
-            <input type="text" name="emergencyContact" placeholder="🚨 Emergency Contact" class="input" />
+            <input type="tel" name="phoneNumber" placeholder="📞 Phone Number" class="input" style="width: 95%;"/>
+            <textarea name="address" placeholder="🏠 Address" class="textarea"  style="width: 95%;"></textarea>
+             <input type="text" name="emergencyContact" placeholder="🚨 Emergency Contact" class="input"  style="width: 95%;"/>
           </div>
 
           <div class="section">
             <h2>🩺 Medical Information</h2>
-            <select name="bloodType" class="input">
+            <select name="bloodType" class="input" style="width: 99.1%;">
               <option value="">Blood Type</option>
               <option value="A+">🅰️+</option>
               <option value="A-">🅰️-</option>
@@ -79,11 +79,11 @@
               <option value="O+">🅾️+</option>
               <option value="O-">🅾️-</option>
             </select>
-            <textarea name="allergies" placeholder="🤧 Allergies" class="textarea"></textarea>
-            <textarea name="currentMedications" placeholder="💊 Current Medications" class="textarea"></textarea>
-            <textarea name="pastMedicalHistory" placeholder="📜 Past Medical History" class="textarea"></textarea>
+            <textarea name="allergies" placeholder="🤧 Allergies" class="textarea" style="width: 95%;"></textarea>
+            <textarea name="currentMedications" placeholder="💊 Current Medications" class="textarea"  style="width: 95%;"></textarea>
+            <textarea name="pastMedicalHistory" placeholder="📜 Past Medical History" class="textarea"  style="width: 95%;"></textarea>
             <textarea name="familyMedicalHistory" placeholder="👨‍👩‍👧‍👦 Family Medical History"
-              class="textarea"></textarea>
+              class="textarea" style="width: 95%;"></textarea>
           </div>
 
           <div class="section">
@@ -91,28 +91,28 @@
             <div class="checkboxGroup">
               <div class="checkbox">
                 <input type="checkbox" name="smoking" id="smoking" />
-                <label for="smoking">🚬 Do you smoke?</label>
+                <label for="smoking" style="color: white; margin: 10px;">🚬 Do you smoke?</label>
               </div>
               <div class="checkbox">
                 <input type="checkbox" name="alcohol" id="alcohol" />
-                <label for="alcohol">🍷 Do you consume alcohol?</label>
+                <label for="alcohol" style="color: white; margin: 10px;">🍷 Do you consume alcohol?</label>
               </div>
             </div>
-            <select name="exercise" class="input">
+            <select name="exercise" class="input" style="width: 99%;">
               <option value="">Exercise Frequency</option>
               <option value="never">🛋️ Never</option>
               <option value="occasionally">🚶 Occasionally</option>
               <option value="regularly">🏃 Regularly</option>
               <option value="daily">💪 Daily</option>
             </select>
-            <input type="text" name="dietaryRestrictions" placeholder="🥗 Dietary Restrictions" class="input" />
-            <input type="text" name="occupation" placeholder="💼 Occupation" class="input" />
+            <input type="text" name="dietaryRestrictions" placeholder="🥗 Dietary Restrictions" class="input" style="width: 95%;"/>
+            <input type="text" name="occupation" placeholder="💼 Occupation" class="input" style="width: 95%;"/>
           </div>
 
           <div class="section">
             <h2>📋 Insurance Information</h2>
-            <input type="text" name="insuranceProvider" placeholder="🏢 Insurance Provider" class="input" />
-            <input type="text" name="insuranceNumber" placeholder="🔢 Insurance Number" class="input" />
+            <input type="text" name="insuranceProvider" placeholder="🏢 Insurance Provider" class="input" style="width: 95%;"/>
+            <input type="text" name="insuranceNumber" placeholder="🔢 Insurance Number" class="input" style="width: 95%;"/>
           </div>
 
           <button type="submit" class="button">Register 📝</button>
