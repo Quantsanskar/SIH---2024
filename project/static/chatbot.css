@@ -171,3 +171,15 @@ body {
 #stop-btn:hover {
     background-color: #ff3333;
 }
+
+.message-content {
+    width: 100%;
+}
+
+.message-content p {
+    margin: 0 0 10px 0;
+}
+
+.message-content ul, .message-content ol {
+    margin: 0 0 10px 20px;
+}

@@ -13,6 +13,8 @@ const stopBtn = document.getElementById('stop-btn');
 
 let isResponding = false;
 let shouldStop = false;
+let chat;
+let markedLoaded = false;
 
 chatbotToggle.addEventListener('click', toggleChatbot);
 chatbotSendBtn.addEventListener('click', sendMessage);
@@ -22,11 +24,22 @@ chatbotInput.addEventListener('keypress', (e) => {
 stopBtn.addEventListener('click', stopResponse);
 
 function toggleChatbot() {
-    if (chatbotContainer.style.display === 'none') {
-        chatbotContainer.style.display = 'flex';
-    } else {
-        chatbotContainer.style.display = 'none';
-    }
+    chatbotContainer.style.display = chatbotContainer.style.display === 'none' ? 'flex' : 'none';
+}
+
+async function initializeChat() {
+    chat = model.startChat({
+        history: [
+            {
+                role: "user",
+                parts: [{ text: "You are a medical Q&A chatbot. Only answer questions related to healthcare, medicine, and general wellness. If a question is not related to these topics, politely inform the user that you can only assist with healthcare-related queries. Always format your responses using Markdown for better readability." }]
+            },
+            {
+                role: "model",
+                parts: [{ text: "Understood. I am a medical Q&A chatbot specializing in healthcare, medicine, and general wellness topics. I will only answer questions related to these areas and will use Markdown formatting for better readability in my responses. If a question is outside my scope, I'll politely inform the user and redirect them to ask healthcare-related questions." }]
+            }
+        ],
+    });
 }
 
 async function sendMessage() {
@@ -44,14 +57,18 @@ async function sendMessage() {
     showThinking();
 
     try {
-        const result = await model.generateContent(userMessage);
-        removeThinking();
+        if (!chat) {
+            await initializeChat();
+        }
+
+        const result = await chat.sendMessage(userMessage);
         const botMessage = result.response.text();
+        removeThinking();
         await typeMessageWithPauses(botMessage);
     } catch (error) {
         console.error('Error:', error);
         removeThinking();
-        appendMessage('bot', 'Sorry, something went wrong.');
+        appendMessage('bot', 'Sorry, something went wrong. Please try again.');
     } finally {
         isResponding = false;
         updateUIState();
@@ -62,9 +79,9 @@ function appendMessage(sender, message) {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
 
-    const contentElement = document.createElement('p');
-    contentElement.style.margin = '0';
-    contentElement.textContent = message;
+    const contentElement = document.createElement('div');
+    contentElement.classList.add('message-content');
+    contentElement.innerHTML = markedLoaded ? marked.parse(message) : message;
     messageElement.appendChild(contentElement);
 
     chatbotMessages.appendChild(messageElement);
@@ -76,16 +93,25 @@ async function typeMessageWithPauses(message) {
     botMessageElement.classList.add('message', 'bot-message');
     chatbotMessages.appendChild(botMessageElement);
 
-    const contentElement = document.createElement('p');
-    contentElement.style.margin = '0';
+    const contentElement = document.createElement('div');
+    contentElement.classList.add('message-content');
     botMessageElement.appendChild(contentElement);
 
     const words = message.split(' ');
+    let currentParagraph = '';
+
     for (let i = 0; i < words.length; i++) {
         if (shouldStop) break;
-        contentElement.textContent += words[i] + ' ';
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-        await new Promise(resolve => setTimeout(resolve, 50)); // Adjust typing speed here
+        currentParagraph += words[i] + ' ';
+
+        if (words[i].endsWith('.') || words[i].endsWith('!') || words[i].endsWith('?') || i === words.length - 1) {
+            contentElement.innerHTML += markedLoaded ? marked.parse(currentParagraph.trim()) : currentParagraph.trim();
+            currentParagraph = '';
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            await new Promise(resolve => setTimeout(resolve, 100)); // Pause after each sentence
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 20)); // Adjust typing speed here
     }
 }
 
@@ -115,5 +141,35 @@ function updateUIState() {
     chatbotSendBtn.style.display = isResponding ? 'none' : 'inline-block';
 }
 
-// Initial greeting message
-appendMessage('bot', 'Hello! I\'m a Medical Q&A Chatbot. How can I assist you today?');
+// Load the Marked library for Markdown parsing
+function loadMarked() {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+        script.onload = () => {
+            console.log('Marked library loaded');
+            markedLoaded = true;
+            resolve();
+        };
+        script.onerror = () => {
+            console.error('Failed to load Marked library');
+            reject();
+        };
+        document.head.appendChild(script);
+    });
+}
+
+// Initialize the chatbot
+async function initChatbot() {
+    try {
+        await loadMarked();
+    } catch (error) {
+        console.error('Error loading Marked library:', error);
+    }
+
+    // Initial greeting message
+    appendMessage('bot', '# Welcome to the Medical Q&A Chatbot\n\nHello! I\'m here to assist you with healthcare-related questions. How can I help you today?');
+}
+
+// Call initChatbot when the script loads
+initChatbot();

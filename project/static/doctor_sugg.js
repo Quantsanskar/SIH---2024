@@ -6,6 +6,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 const problemInput = document.getElementById('problem');
 const locationInput = document.getElementById('location');
+const severitySelect = document.getElementById('severity');
 const searchBtn = document.getElementById('search-btn');
 const resultsContainer = document.getElementById('results');
 const loadingIndicator = document.getElementById('loading');
@@ -15,6 +16,7 @@ searchBtn.addEventListener('click', searchSpecialists);
 async function searchSpecialists() {
     const problem = problemInput.value.trim();
     const location = locationInput.value.trim();
+    const severity = severitySelect.value;
 
     if (!problem || !location) {
         alert('Please enter both a medical problem and a location.');
@@ -23,44 +25,27 @@ async function searchSpecialists() {
 
     showLoading();
 
-    const prompt = `I am experiencing ${problem}. Please suggest doctors and hospitals near ${location} that specialize in treating ${problem}. Provide the following information for each suggestion:
+    const prompt = `Request for Doctor and Hospital Recommendations
 
-* **Doctor or Hospital Name:**
-* **Specialization:**
-* **Address:**
-* **Contact Information:**
-* **Timings:**
-* **User Reviews:**
-* **Severity Level:** [normal, severe, danger]
-* **Website:** [Find and display the website]
+Problem: ${problem}
+Location: ${location}
+Severity Level: ${severity}
 
-Based on the severity level of my ${problem}, please recommend doctors or hospitals that are appropriate for my condition. I would prefer real-time data and a comprehensive list of options. Please display the results in the following format:
+Please provide a detailed list of doctors and hospitals that specialize in treating ${problem} in ${location} for the ${severity.toLowerCase()} severity level. List at least 5 relevant options, ensuring real-time data accuracy. Organize the information as follows:
 
-**Doctors and Hospitals for ${problem} Treatment in ${location}**
+1. Name: [Doctor/Hospital Name]
+2. Specialization: [Field of Expertise]
+3. Address: [Full Address]
+4. Contact Information:
+   Phone: [Phone Number]
+   Email: [Email Address]
+   Website: [Official Website Link]
+5. Timings: [Available Hours]
+6. User Reviews: [Average Rating and Brief Summary of Comments]
+7. Why Recommended: [Brief explanation of why this option is suitable for the given problem and severity]
 
-### Normal Severity Level
+Please ensure that all information provided is accurate, up-to-date, and relevant to the specified medical problem, location, and severity level. If there are any notable certifications, awards, or unique treatment approaches, please include those as well.`;
 
-**Doctor Name:** Dr. [Doctor's Name]
-**Specialization:** [Doctor's Specialization]
-**Address:** [Doctor's or Hospital's Address]
-**Contact Information:**
-* **Phone:** [Phone Number]
-* **Email:** [Email Address]
-* **Website:** [Display the website found online]
-**Timings:** [Timings]
-**User Reviews:** [Average Rating] (Example: 4.5/5)
-
-**Hospital Name:** [Hospital Name]
-**Specialization:** [Hospital's Specialization]
-**Address:** [Hospital's Address]
-**Contact Information:**
-* **Phone:** [Phone Number]
-* **Email:** [Email Address]
-* **Website:** [Display the website found online]
-* **Timings:** [Timings]
-* **User Reviews:** [Average Rating] (Example: 4.2/5)
-
-[Repeat for Severe and Danger Severity Levels]`;
     try {
         const result = await model.generateContent(prompt);
         const response = await result.response;
@@ -75,14 +60,39 @@ Based on the severity level of my ${problem}, please recommend doctors or hospit
 }
 
 function displayResults(content) {
-    resultsContainer.textContent = content;
+    const formattedContent = formatResults(content);
+    resultsContainer.innerHTML = formattedContent;
+}
+
+function formatResults(content) {
+    // Split the content into sections for each recommendation
+    const sections = content.split(/\d+\.\s+Name:/);
+    
+    // Remove any empty sections
+    const filteredSections = sections.filter(section => section.trim() !== '');
+    
+    // Format each section
+    const formattedSections = filteredSections.map((section, index) => {
+        const lines = section.split('\n');
+        const name = lines[0].trim();
+        const rest = lines.slice(1).join('\n');
+        
+        return `
+            <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                <h2 class="text-xl font-bold mb-2">${index + 1}. ${name}</h2>
+                <pre class="whitespace-pre-wrap">${rest}</pre>
+            </div>
+        `;
+    });
+    
+    return formattedSections.join('');
 }
 
 function showLoading() {
-    loadingIndicator.style.display = 'block';
-    resultsContainer.textContent = '';
+    loadingIndicator.classList.remove('hidden');
+    resultsContainer.innerHTML = '';
 }
 
 function hideLoading() {
-    loadingIndicator.style.display = 'none';
+    loadingIndicator.classList.add('hidden');
 }
