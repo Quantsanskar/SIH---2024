@@ -4,9 +4,9 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from .models import Patient, AnalyzedReport
-from .utils import generate_otp, send_otp_email, generate_content, format_response, extract_text_from_pdf, format_stars
+from .utils import generate_otp, send_otp_email, generate_content, format_response, extract_text_from_pdf, remove_star
 from django.utils.safestring import mark_safe
-from django.shortcuts import get_object_or_404
+
 
 
 # Create your views here.
@@ -171,7 +171,7 @@ def patient_portal(request):
         
         prompt_text = f"Give Suggestions for This medical report:- {text}"
         gemini_output = generate_content(prompt_text)
-        #t1 = gemini_output["candidates"][0]["content"]
+        gemini_output = remove_star(gemini_output["candidates"][0]["content"]["parts"][0]["text"])
         #t2 = format_stars(t1)
         
         Analyzed_Report = AnalyzedReport(analysis=text, report=data,gemini_output= gemini_output)
