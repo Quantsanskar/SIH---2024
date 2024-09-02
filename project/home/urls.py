@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -18,5 +18,6 @@ urlpatterns = [
     path("terms_of_service/", views.terms_of_service, name="terms_of_service"),
     path("privacy_policy/", views.privacy_policy, name="privacy_policy"),
     path("doctor_sugg",views.doctor_sugg,name="doctor_sugg"),
+    path('social/', include('social_django.urls', namespace='social')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

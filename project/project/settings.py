@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "crispy_forms",
     "home",
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +54,24 @@ MIDDLEWARE = [
     
 ]
 
+# Add the authentication backends
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',  # for Google OAuth2
+    'django.contrib.auth.backends.ModelBackend',  # this is the default backend
+)
+
 ROOT_URLCONF = "project.urls"
+# Google OAuth2 configuration
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '641180451145-a47btc1jj1crububnb72msqg1ga8bh93.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+# Redirect URLs after login/logout
+LOGIN_REDIRECT_URL = '/patient_portal/'
+LOGOUT_REDIRECT_URL = '/'
+# Other optional settings
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+
 
 TEMPLATES = [
     {
@@ -66,6 +84,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
