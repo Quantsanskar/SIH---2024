@@ -5,6 +5,8 @@ from django.core.mail import send_mail
 import PyPDF2
 import json
 import re
+from social_django.models import UserSocialAuth
+
 
 def generate_otp():
     return "".join(random.choices(string.digits, k=6))
@@ -106,5 +108,46 @@ def remove_star(text):
     text = text.replace('#', '')
     return text.replace('*', '')
 
+
+
+
+def get_google_fit_data(access_token):
+    # Define the endpoint URL
+    url = 'https://fitness.googleapis.com/fitness/v1/users/me/dataSources'
+    
+    # Set up the headers with the access token
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Accept': 'application/json',
+    }
+
+    # Make the request
+    response = requests.get(url, headers=headers)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        data = response.json()
+        return data
+    else:
+        print(f"Error {response.status_code}: {response.text}")
+        return None
+
+# # Example usage
+# access_token = 'your-access-token'  # Replace with the actual access token from Google Sign-In
+# data = get_google_fit_data(access_token)
+# print(data)
+
+
+def get_google_access_token(user):
+    try:
+        # Get the UserSocialAuth object for the user and Google
+        user_social_auth = user.social_auth.get(provider='google-oauth2')
+
+        # Retrieve the access token
+        access_token = user_social_auth.extra_data['access_token']
+        
+        return access_token
+    except UserSocialAuth.DoesNotExist:
+        return None  # Handle the case where the user is not authenticated via Google
 
 

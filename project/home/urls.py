@@ -19,5 +19,6 @@ urlpatterns = [
     path("privacy_policy/", views.privacy_policy, name="privacy_policy"),
     path("doctor_sugg",views.doctor_sugg,name="doctor_sugg"),
     path('social/', include('social_django.urls', namespace='social')),
+    path("fit_data",views.fetch_fit_data,name="fit_data"),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

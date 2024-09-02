@@ -4,8 +4,9 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from .models import Patient, AnalyzedReport
-from .utils import generate_otp, send_otp_email, generate_content, format_response, extract_text_from_pdf, remove_star
+from .utils import generate_otp, send_otp_email, generate_content, format_response, extract_text_from_pdf, remove_star, get_google_access_token, get_google_fit_data
 from django.utils.safestring import mark_safe
+import requests
 
 
 
@@ -271,3 +272,15 @@ def privacy_policy(request):
 
 def terms_of_service(request):
     return render(request, "tos.html")
+
+
+
+def fetch_fit_data(request):
+    # Assuming you have the access token stored in the session or passed in some other way
+    access_token = get_google_access_token(request.user) # Or however you manage tokens
+    data = get_google_fit_data(access_token)
+
+    if data:
+        return render(request, 'fit_data.html', {'output': data})
+    else:
+        return render(request, 'fit_data.html', {'error': 'Access token is missing'})
