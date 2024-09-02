@@ -102,4 +102,9 @@ def format_response(text):
     return '\n'.join(formatted_sections)
 
 
+def remove_star(text):
+    text = text.replace('#', '')
+    return text.replace('*', '')
+
+
 
