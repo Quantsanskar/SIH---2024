@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "home",
     'social_django',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '641180451145-a47btc1jj1crububnb72msqg1ga8bh93.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 # Redirect URLs after login/logout
-LOGIN_REDIRECT_URL = '/patient_portal/'
+LOGIN_REDIRECT_URL = '/patient_portal'
 LOGOUT_REDIRECT_URL = '/'
 # Other optional settings
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
@@ -177,3 +178,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/fitness.activity.read',
     'https://www.googleapis.com/auth/fitness.body.read',
 ]
+
+
+#-----------------CHANNELS SETTINGS-------------------
+ASGI_APPLICATION = 'myproject.asgi.application'

@@ -284,3 +284,8 @@ def fetch_fit_data(request):
         return render(request, 'fit_data.html', {'output': data})
     else:
         return render(request, 'fit_data.html', {'error': 'Access token is missing'})
+
+
+    
+def video_call(request):
+    return render(request, 'video_call.html')

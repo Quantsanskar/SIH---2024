@@ -1,0 +1,8 @@
+Django==4.2.15
+django-crispy-forms==2.3
+pypdf2==3.0.1
+pytz==2024.1
+social-auth-app-django==5.4.2
+requests==2.31.0
+djangorestframework
+channels

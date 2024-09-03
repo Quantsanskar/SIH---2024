@@ -173,6 +173,7 @@ html {
 .features,
 .about,
 .contact {
+    height: 100vh;
     background-color: white;
     padding: 2rem;
     border-radius: 15px;
